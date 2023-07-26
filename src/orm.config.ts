@@ -3,7 +3,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 function ormConfig(): TypeOrmModuleOptions {
   const commonConf = {
-    SYNCRONIZE: false,
+    SYNCRONIZE: true,
     ENTITIES: [__dirname + '/entities/*{.ts,.js}'],
     MIGRATIONS: [__dirname + '/migrations/**/*{.ts,.js}'],
     MIGRATIONS_RUN: false,
@@ -14,7 +14,7 @@ function ormConfig(): TypeOrmModuleOptions {
     database: process.env.DATABASE_NAME,
     host: process.env.DATABASE_HOST,
     port: Number(process.env.DATABASE_PORT),
-    username: process.env.DATABASE_NAME,
+    username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     logging: true,
     synchronize: commonConf.SYNCRONIZE,
