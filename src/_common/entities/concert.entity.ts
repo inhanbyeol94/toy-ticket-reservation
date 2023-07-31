@@ -1,12 +1,4 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, RelationId, UpdateDateColumn } from 'typeorm';
 import { Member } from './member.entity';
 import { Reservation } from './reservation.entity';
 
@@ -30,7 +22,7 @@ export class Concert {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Member, (members) => members.concerts, {
+  @ManyToOne(() => Member, (member) => member.concerts, {
     onDelete: 'CASCADE',
     nullable: false,
   })

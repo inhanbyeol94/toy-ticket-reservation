@@ -1,12 +1,4 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, RelationId, UpdateDateColumn } from 'typeorm';
 import { Member } from './member.entity';
 
 @Entity()
@@ -29,7 +21,7 @@ export class PointHistory {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Member, (members) => members.points, {
+  @ManyToOne(() => Member, (member) => member.points, {
     onDelete: 'CASCADE',
     nullable: false,
   })
