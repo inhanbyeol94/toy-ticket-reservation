@@ -6,6 +6,7 @@ import { Member } from 'src/_common/entities/member.entity';
 import { DataSource, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { PointHistory } from 'src/_common/entities/pointHistory.entity';
+import { remainingPoints } from 'src/_util/remainingPoints';
 
 @Injectable()
 export class MembersService {
@@ -36,10 +37,7 @@ export class MembersService {
       select: { email: true, name: true, id: true },
       relations: { points: true },
     });
-    return {
-      profile,
-      remainingPoints: profile.points.reduce((acc, cur) => (cur.status == true ? acc + cur.amount : acc - cur.amount), 0),
-    };
+    return { profile, remainingPoints: remainingPoints(profile.points) };
   }
 
   /** 패스워드 암호화 */
