@@ -9,13 +9,12 @@ export class JwtAccessStrategy extends PassportStrategy(Strategy, 'access') {
   constructor(private authService: AuthService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ignoreExpiration: true,
+      ignoreExpiration: false,
       secretOrKey: process.env.ACCESS_SECRET_KEY,
     });
   }
 
   async validate(payload: Payload, done: VerifiedCallback): Promise<any> {
-    console.log(ExtractJwt.fromAuthHeaderAsBearerToken());
     const user = await this.authService.tokenValidateUser(payload);
     if (!user) {
       return done(new UnauthorizedException({ message: 'user doew not exist' }), false);
