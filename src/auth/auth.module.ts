@@ -10,7 +10,6 @@ import { JwtAccessStrategy } from 'src/_common/security/access.strategy';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Member]), JwtModule, PassportModule],
-  exports: [TypeOrmModule],
   controllers: [AuthController],
   providers: [AuthService, MembersService, JwtAccessStrategy],
 })
